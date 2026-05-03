@@ -13,9 +13,14 @@ Match statistics overlay system for CS2 broadcasting and OBS overlays. Provides 
 - **FACEIT Integration**: Real-time match data from FACEIT API with automatic match ID extraction
 - **OBS Ready**: Clean overlay interface for broadcasting without input elements
 
-## Installation
+## GitHub Codespaces
 
-1. Clone the repository:
+The easiest way to get started is with GitHub Codespaces:
+
+1. Add `FACEIT_API_KEY` as a [Codespaces secret](https://github.com/settings/codespaces) in your GitHub account and grant access to this repository.
+2. Open the repository in a Codespace — the environment is configured automatically and the dev server starts on port 5173.
+
+## Installation
 
    ```bash
    git clone https://github.com/oplehtinen/faceit-obs-stats.git
@@ -31,7 +36,8 @@ Match statistics overlay system for CS2 broadcasting and OBS overlays. Provides 
 3. Create `.env` file:
 
    ```bash
-   FACEIT_API_KEY=your_faceit_api_key_here
+   cp .env.example .env
+   # Then edit .env and set your FACEIT_API_KEY
    ```
 
 4. Start development server:
