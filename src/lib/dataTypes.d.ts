@@ -83,6 +83,14 @@ export type teams = {
 	faction1: team;
 	faction2: team;
 };
+export type mapPoolEntity = {
+	name: string;
+	class_name: string;
+	game_map_id: string;
+	guid: string;
+	image_lg: string;
+	image_sm: string;
+};
 export type mapStatsForTeams = {
 	[key: mapName]: mapData;
 };
@@ -108,6 +116,7 @@ export type matchResults = {
 export type matchDetails = {
 	match_id: matchId;
 	competition_id: tournamentId;
+	competition_type: string;
 	competition_name: string;
 	organizer_id: organizerId;
 	teams?: {
@@ -115,7 +124,7 @@ export type matchDetails = {
 		faction2: team;
 	} | null;
 	voting: {
-		map: { 
+		map: {
 			pick: mapPicks;
 			entities?: Array<{
 				name: string;
@@ -135,4 +144,4 @@ export type matchDetails = {
 	results: matchResults;
 	status: matchStatus;
 };
-interface tournamentDetails {}
+interface tournamentDetails { }

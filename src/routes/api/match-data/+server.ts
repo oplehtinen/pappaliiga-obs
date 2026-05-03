@@ -4,7 +4,8 @@ import {
 	getMatchStats,
 	getOrganizerDetails,
 	getTeamStatsForMap,
-	getTournamentStatsForPlayer
+	getTournamentStatsForPlayer,
+	getMapPoolEntities
 } from '$lib/faceit';
 import type { matchId } from '$lib/dataTypes';
 import { MOCK_ORGANIZER_DATA, MOCK_MATCH_IDS } from '$lib/mockMatchData';
@@ -86,14 +87,10 @@ export const GET: RequestHandler = async ({ url }) => {
 			matchDetailsData.competition_id,
 			teamsData
 		);
-		
-		// Extract map pool from match voting data instead of using hardcoded values
-		const tournamentMaps = matchDetailsData.voting?.map?.entities
-			? matchDetailsData.voting.map.entities.map((entity) => entity.name)
-			: ['Inferno', 'Train', 'Ancient', 'Mirage', 'Nuke', 'Dust2', 'Anubis']; // Fallback
 
+		const mapPool = await getMapPoolEntities(matchDetailsData);
 		const teamArr = [teamsData.faction1, teamsData.faction2];
-		const mapStatsTeam = await getTeamStatsForMap(teamArr, tournamentMaps);
+		const mapStatsTeam = await getTeamStatsForMap(teamArr, mapPool);
 		const pickedMaps = matchDetailsData.voting?.map?.pick || [];
 		const pickedStats: { [n: number]: unknown } = {};
 		const matchStats = await getMatchStats(matchId as matchId);

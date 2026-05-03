@@ -82,7 +82,8 @@ describe('Match Data API - Dynamic Mock Mode', () => {
 			vi.mocked(getMatchDetails).mockResolvedValue({
 				match_id: matchId,
 				competition_id: 'tournament-x' as any,
-				competition_name: 'X',
+				competition_type: 'championship',
+			competition_name: 'X',
 				organizer_id: 'org-x' as any,
 				teams: null,
 				voting: { map: { pick: [] } },
@@ -110,7 +111,8 @@ describe('Match Data API - Dynamic Mock Mode', () => {
 			vi.mocked(getMatchDetails).mockResolvedValue({
 				match_id: matchId,
 				competition_id: 'tournament-x' as any,
-				competition_name: 'X',
+				competition_type: 'championship',
+			competition_name: 'X',
 				organizer_id: 'org-x' as any,
 				teams: {
 					faction1: {

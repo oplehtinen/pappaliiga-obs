@@ -100,6 +100,7 @@ export const MOCK_MATCH_DETAILS: Record<string, matchDetails> = {
 	[MOCK_MATCH_IDS.SCHEDULED]: {
 		match_id: MOCK_MATCH_IDS.SCHEDULED,
 		competition_id: 'tournament-123' as tournamentId,
+		competition_type: 'championship',
 		competition_name: 'Test Tournament',
 		organizer_id: 'organizer-123' as organizerId,
 		teams: {
@@ -127,6 +128,7 @@ export const MOCK_MATCH_DETAILS: Record<string, matchDetails> = {
 	[MOCK_MATCH_IDS.ONGOING_MAP1]: {
 		match_id: MOCK_MATCH_IDS.ONGOING_MAP1,
 		competition_id: 'tournament-123' as tournamentId,
+		competition_type: 'championship',
 		competition_name: 'Test Tournament',
 		organizer_id: 'organizer-123' as organizerId,
 		teams: {
@@ -154,6 +156,7 @@ export const MOCK_MATCH_DETAILS: Record<string, matchDetails> = {
 	[MOCK_MATCH_IDS.ONGOING_MAP2]: {
 		match_id: MOCK_MATCH_IDS.ONGOING_MAP2,
 		competition_id: 'tournament-123' as tournamentId,
+		competition_type: 'championship',
 		competition_name: 'Test Tournament',
 		organizer_id: 'organizer-123' as organizerId,
 		teams: {
@@ -181,6 +184,7 @@ export const MOCK_MATCH_DETAILS: Record<string, matchDetails> = {
 	[MOCK_MATCH_IDS.FINISHED]: {
 		match_id: MOCK_MATCH_IDS.FINISHED,
 		competition_id: 'tournament-123' as tournamentId,
+		competition_type: 'championship',
 		competition_name: 'Test Tournament',
 		organizer_id: 'organizer-123' as organizerId,
 		teams: {
@@ -207,6 +211,7 @@ export const MOCK_MATCH_DETAILS: Record<string, matchDetails> = {
 	[MOCK_MATCH_IDS.LIVE_UPDATING]: {
 		match_id: MOCK_MATCH_IDS.LIVE_UPDATING,
 		competition_id: 'tournament-live' as tournamentId,
+		competition_type: 'championship',
 		competition_name: 'Live Demo Tournament',
 		organizer_id: 'organizer-live' as organizerId,
 		teams: {
@@ -235,6 +240,7 @@ export const MOCK_MATCH_DETAILS: Record<string, matchDetails> = {
 	[MOCK_MATCH_IDS.ONE_PLAYED_WAITING]: {
 		match_id: MOCK_MATCH_IDS.ONE_PLAYED_WAITING,
 		competition_id: 'tournament-123' as tournamentId,
+		competition_type: 'championship',
 		competition_name: 'Test Tournament',
 		organizer_id: 'organizer-123' as organizerId,
 		teams: {
@@ -996,6 +1002,7 @@ export function generateLiveUpdatingData(): { details: matchDetails; stats: matc
 	const details: matchDetails = {
 		match_id: MOCK_MATCH_IDS.LIVE_UPDATING,
 		competition_id: 'tournament-live' as tournamentId,
+		competition_type: 'championship',
 		competition_name: 'Live Demo Tournament',
 		organizer_id: 'organizer-live' as organizerId,
 		teams: {
@@ -1153,6 +1160,7 @@ export function generateAlwaysNewMockData(): { details: matchDetails; stats: mat
 	const details: matchDetails = {
 		match_id: MOCK_MATCH_IDS.LIVE_UPDATING,
 		competition_id: 'tournament-live' as tournamentId,
+		competition_type: 'championship',
 		competition_name: 'Live Demo Tournament',
 		organizer_id: 'organizer-live' as organizerId,
 		teams: {

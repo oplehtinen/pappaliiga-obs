@@ -2,6 +2,7 @@ import { FACEIT_API_KEY } from '$env/static/private';
 import type {
 	mapData,
 	mapName,
+	mapPoolEntity,
 	mapStat,
 	mapStatsForTeams,
 	matchDetails,
@@ -95,7 +96,7 @@ const getTournamentStatsForPlayer = async (
 	}
 	return teams;
 };
-const mapData = async (teamId: teamId): Promise<mapData[]> => {
+const teamMapData = async (teamId: teamId): Promise<mapData[]> => {
 	const endpoint = `teams/${teamId}/stats/cs2`;
 	const data = await faceitAPI(endpoint);
 
@@ -103,9 +104,45 @@ const mapData = async (teamId: teamId): Promise<mapData[]> => {
 
 	return maps;
 };
+
+const getMapPoolFromCompetition = async (
+	competitionId: string,
+	competitionType: string
+): Promise<mapPoolEntity[]> => {
+	const base = competitionType === 'hub' ? 'hubs' : 'championships';
+	const data = await faceitAPI(`${base}/${competitionId}/matches?type=past&limit=10`);
+	for (const match of data.items || []) {
+		const entities: mapPoolEntity[] | undefined = match.voting?.map?.entities;
+		if (entities?.length) return entities;
+	}
+	return [];
+};
+
+const getMapPoolEntities = async (matchDetails: matchDetails): Promise<mapPoolEntity[]> => {
+	if (matchDetails.voting?.map?.entities?.length) {
+		return matchDetails.voting.map.entities;
+	}
+	if (matchDetails.competition_id && matchDetails.competition_type) {
+		const entities = await getMapPoolFromCompetition(
+			matchDetails.competition_id,
+			matchDetails.competition_type
+		);
+		if (entities.length) return entities;
+	}
+	// Final fallback: use hardcoded map pool with static image data
+	return Object.entries(staticMapData).map(([name, data]) => ({
+		name,
+		class_name: data.class_name,
+		game_map_id: data.game_map_id,
+		guid: data.guid,
+		image_lg: data.image_lg,
+		image_sm: data.image_sm
+	}));
+};
+
 const getTeamStatsForMaps = async (
 	teams: team[],
-	tournamentMaps: mapName[]
+	mapEntities: mapPoolEntity[]
 ): Promise<mapStatsForTeams> => {
 	// for each team, get the map stats
 	const createMapStats = async (): Promise<mapStatsForTeams> => {
@@ -115,55 +152,33 @@ const getTeamStatsForMaps = async (
 			Wins: 0,
 			'Win Rate %': 0
 		};
-		for (let i = 0; i < tournamentMaps.length; i++) {
-			const mapName = tournamentMaps[i];
-			const mapKey = mapName as keyof typeof staticMapData;
-
-			mapStats[mapName] = {
-				label: mapName,
-				img_regular: staticMapData[mapKey].image_lg,
+		// Initialise map pool entries using API-provided image URLs
+		for (const entity of mapEntities) {
+			mapStats[entity.name] = {
+				label: entity.name,
+				img_regular: entity.image_lg,
 				map_stats: [emptyMapStat, emptyMapStat]
 			};
 		}
+		const poolNames = mapEntities.map((e) => e.name);
 		for (let i = 0; i < teams.length; i++) {
 			const team = teams[i];
 			if (!team || !team.faction_id) break;
-			const maps = await mapData(team.faction_id);
-			//(maps);
-			// for each map, get the stats
-			for (let j = 0; j < maps.length; j++) {
-				const map = maps[j];
-
+			const maps = await teamMapData(team.faction_id);
+			for (const map of maps) {
 				const mapName = map.label as mapName;
-				const mapKey = mapName as keyof typeof staticMapData;
-				const mapDataItem: mapData = {
-					img_regular: staticMapData[mapKey]?.image_lg || map.img_regular,
-					label: map.label as mapName
-				};
-
+				if (!poolNames.includes(mapName)) continue;
 				if (!(map && map.stats && map.stats.Matches)) continue;
 				const mapStat: mapStat = {
 					Matches: parseFloat(map.stats.Matches as unknown as string),
 					Wins: parseFloat(map.stats.Wins as unknown as string),
 					'Win Rate %': map.stats['Win Rate %']
 				};
-
-				// if the map is not in the tournament maps, skip it
-
-				if (!tournamentMaps.includes(mapName)) {
-					continue;
-				}
-				mapStats[mapName].label = mapDataItem.label;
-				mapStats[mapName].img_regular = mapDataItem.img_regular;
 				if (!mapStats[mapName].map_stats) continue;
 				mapStats[mapName].map_stats[i] = mapStat;
-
-				//maps[map.label] = mapStat;
 			}
 		}
-		return new Promise((resolve) => {
-			resolve(mapStats);
-		});
+		return mapStats;
 	};
 
 	const mapStats = await createMapStats();
@@ -186,5 +201,6 @@ export {
 	getOrganizerDetails,
 	getMatchStats,
 	getTournamentStatsForPlayer,
+	getMapPoolEntities,
 	getTeamStatsForMaps as getTeamStatsForMap
 };
