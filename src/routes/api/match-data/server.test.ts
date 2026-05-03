@@ -83,6 +83,7 @@ describe('Match Data API - Dynamic Mock Mode', () => {
 				match_id: matchId,
 				competition_id: 'tournament-x' as any,
 				competition_type: 'championship',
+			best_of: 3,
 			competition_name: 'X',
 				organizer_id: 'org-x' as any,
 				teams: null,
@@ -112,6 +113,7 @@ describe('Match Data API - Dynamic Mock Mode', () => {
 				match_id: matchId,
 				competition_id: 'tournament-x' as any,
 				competition_type: 'championship',
+			best_of: 3,
 			competition_name: 'X',
 				organizer_id: 'org-x' as any,
 				teams: {

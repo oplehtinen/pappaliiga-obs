@@ -102,6 +102,7 @@ export const MOCK_MATCH_DETAILS: Record<string, matchDetails> = {
 		competition_id: 'tournament-123' as tournamentId,
 		competition_type: 'championship',
 		competition_name: 'Test Tournament',
+		best_of: 3,
 		organizer_id: 'organizer-123' as organizerId,
 		teams: {
 			faction1: { ...mockTeam1 },
@@ -130,6 +131,7 @@ export const MOCK_MATCH_DETAILS: Record<string, matchDetails> = {
 		competition_id: 'tournament-123' as tournamentId,
 		competition_type: 'championship',
 		competition_name: 'Test Tournament',
+		best_of: 3,
 		organizer_id: 'organizer-123' as organizerId,
 		teams: {
 			faction1: { ...mockTeam1, score: 8 },
@@ -158,6 +160,7 @@ export const MOCK_MATCH_DETAILS: Record<string, matchDetails> = {
 		competition_id: 'tournament-123' as tournamentId,
 		competition_type: 'championship',
 		competition_name: 'Test Tournament',
+		best_of: 3,
 		organizer_id: 'organizer-123' as organizerId,
 		teams: {
 			faction1: { ...mockTeam1, score: 1 },
@@ -186,6 +189,7 @@ export const MOCK_MATCH_DETAILS: Record<string, matchDetails> = {
 		competition_id: 'tournament-123' as tournamentId,
 		competition_type: 'championship',
 		competition_name: 'Test Tournament',
+		best_of: 3,
 		organizer_id: 'organizer-123' as organizerId,
 		teams: {
 			faction1: { ...mockTeam1, score: 2 },
@@ -213,6 +217,7 @@ export const MOCK_MATCH_DETAILS: Record<string, matchDetails> = {
 		competition_id: 'tournament-live' as tournamentId,
 		competition_type: 'championship',
 		competition_name: 'Live Demo Tournament',
+		best_of: 3,
 		organizer_id: 'organizer-live' as organizerId,
 		teams: {
 			// Treat as ongoing first map with current round score-like numbers
@@ -242,6 +247,7 @@ export const MOCK_MATCH_DETAILS: Record<string, matchDetails> = {
 		competition_id: 'tournament-123' as tournamentId,
 		competition_type: 'championship',
 		competition_name: 'Test Tournament',
+		best_of: 2,
 		organizer_id: 'organizer-123' as organizerId,
 		teams: {
 			faction1: { ...mockTeam1, score: 1 },
@@ -1004,6 +1010,7 @@ export function generateLiveUpdatingData(): { details: matchDetails; stats: matc
 		competition_id: 'tournament-live' as tournamentId,
 		competition_type: 'championship',
 		competition_name: 'Live Demo Tournament',
+		best_of: 3,
 		organizer_id: 'organizer-live' as organizerId,
 		teams: {
 			faction1: { ...mockTeam1, score: team1Score >= 16 ? 1 : 0 },
@@ -1162,6 +1169,7 @@ export function generateAlwaysNewMockData(): { details: matchDetails; stats: mat
 		competition_id: 'tournament-live' as tournamentId,
 		competition_type: 'championship',
 		competition_name: 'Live Demo Tournament',
+		best_of: 3,
 		organizer_id: 'organizer-live' as organizerId,
 		teams: {
 			faction1: { ...mockTeam1, score: 0 },

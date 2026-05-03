@@ -119,6 +119,7 @@ export type matchDetails = {
 	competition_type: string;
 	competition_name: string;
 	organizer_id: organizerId;
+	best_of: number;
 	teams?: {
 		faction1: team;
 		faction2: team;

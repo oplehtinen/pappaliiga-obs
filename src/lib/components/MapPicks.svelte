@@ -96,8 +96,8 @@
 
 	<div class="flex flex-wrap h-1/5 flex-row">
 		{#each pickedEntries as [key, map], i (key)}
-			{#if match && match.status == 'FINISHED' && roundsPlayed == 2 && i == 2}
-				<br />
+			{#if match && match.status == 'FINISHED' && i >= roundsPlayed}
+				<!-- Skip maps that were never played (e.g. a 2-0 sweep in a BO3) -->
 			{:else}
 				<MapCard
 					data={map}
