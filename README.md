@@ -10,6 +10,8 @@ Match statistics overlay system for CS2 broadcasting and OBS overlays. Provides 
 
 - **Match Statistics**: Map breakdowns with round wins, team performance, and match results
 - **Player Statistics**: Individual analytics with K/D ratios, ADR, headshot percentages, and performance metrics
+- **Map Picks**: View picked maps with team win rates and match progression
+- **Pick/Ban Phase**: Live view of the map pick/ban phase showing all available maps and their status
 - **FACEIT Integration**: Real-time match data from FACEIT API with automatic match ID extraction
 - **OBS Ready**: Clean overlay interface for broadcasting without input elements
 
@@ -51,13 +53,14 @@ Match statistics overlay system for CS2 broadcasting and OBS overlays. Provides 
    - `/mapstats` for map analysis (input page)
    - `/playerstats` for player metrics (input page)
    - `/mappicks` for map picks (input page)
+   - `/pickban` for pick/ban phase (input page)
 
 2. Enter match data:
 
    - Paste FACEIT match URL or enter match ID directly
 
 3. View statistics on dedicated read-only pages:
-   - `/view/mapstats`, `/view/playerstats`, `/view/mappicks`
+   - `/view/mapstats`, `/view/playerstats`, `/view/mappicks`, `/view/pickban`
    - No input elements; ideal for OBS Browser Source
 
 ### Direct Links
@@ -67,6 +70,7 @@ Access statistics directly:
 - Map Stats: `https://your-domain.com/view/mapstats?id=MATCH_ID`
 - Player Stats: `https://your-domain.com/view/playerstats?id=MATCH_ID`
 - Map Picks: `https://your-domain.com/view/mappicks?id=MATCH_ID`
+- Pick/Ban Phase: `https://your-domain.com/view/pickban?id=MATCH_ID`
 
 ## OBS Integration
 
@@ -75,6 +79,7 @@ Access statistics directly:
    - Map stats: `http://localhost:5173/view/mapstats`
    - Player stats: `http://localhost:5173/view/playerstats`
    - Map picks: `http://localhost:5173/view/mappicks`
+   - Pick/ban phase: `http://localhost:5173/view/pickban`
 3. Set size to match canvas (e.g., 1920×1080)
 4. Right-click source > Interact, paste match ID or URL
 5. Optional: Enable "Shutdown source when not visible" to reset between scenes
@@ -118,10 +123,12 @@ src/
 │   ├── mapstats/+page.svelte     # Map stats input
 │   ├── playerstats/+page.svelte  # Player stats input
 │   ├── mappicks/+page.svelte     # Map picks input
+│   ├── pickban/+page.svelte      # Pick/ban phase input
 │   ├── view/
-│   │   ├── mapstats/+page.svelte   # Map stats view-only
-│   │   ├── playerstats/+page.svelte # Player stats view-only
-│   │   └── mappicks/+page.svelte    # Map picks view-only
+│   │   ├── mapstats/+page.svelte     # Map stats view-only
+│   │   ├── playerstats/+page.svelte  # Player stats view-only
+│   │   ├── mappicks/+page.svelte     # Map picks view-only
+│   │   └── pickban/+page.svelte      # Pick/ban phase view-only
 │   └── api/match-data/+server.ts  # Unified match data endpoint
 ├── lib/
 │   ├── components/               # UI components

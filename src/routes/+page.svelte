@@ -16,7 +16,7 @@
 				performance data, and team comparisons.
 			</p>
 			<!-- Top-left GitHub button is provided by the layout on the home page -->
-			<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
 				<div class="card card-compact bg-base-100 shadow-md">
 					<div class="card-body">
 						<h2 class="card-title text-base-content">
@@ -91,6 +91,32 @@
 						<p class="text-base-content/70">Pick/ban cards with win rates and next map.</p>
 						<div class="card-actions justify-end mt-2">
 							<a href={`${base}/mappicks`} class="btn">Open</a>
+						</div>
+					</div>
+				</div>
+
+				<div class="card card-compact bg-base-100 shadow-md">
+					<div class="card-body">
+						<h2 class="card-title text-base-content">
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								class="h-6 w-6"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
+								/>
+							</svg>
+							Pick/Ban Phase
+						</h2>
+						<p class="text-base-content/70">Live view of lobby pick/ban with all maps.</p>
+						<div class="card-actions justify-end mt-2">
+							<a href={`${base}/pickban`} class="btn">Open</a>
 						</div>
 					</div>
 				</div>

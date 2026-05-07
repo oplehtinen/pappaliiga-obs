@@ -13,6 +13,67 @@ import type {
 	mapData,
 	mapStat
 } from './dataTypes';
+import { maps as staticMapData } from './maps';
+
+// Map entities for mock voting data (all CS2 maps in pool)
+const MOCK_MAP_ENTITIES = [
+	{
+		name: 'Inferno',
+		class_name: 'de_inferno',
+		game_map_id: 'de_inferno',
+		guid: 'de_inferno',
+		image_lg: staticMapData.Inferno.image_lg,
+		image_sm: staticMapData.Inferno.image_sm
+	},
+	{
+		name: 'Mirage',
+		class_name: 'de_mirage',
+		game_map_id: 'de_mirage',
+		guid: 'de_mirage',
+		image_lg: staticMapData.Mirage.image_lg,
+		image_sm: staticMapData.Mirage.image_sm
+	},
+	{
+		name: 'Dust2',
+		class_name: 'de_dust2',
+		game_map_id: 'de_dust2',
+		guid: 'de_dust2',
+		image_lg: staticMapData.Dust2.image_lg,
+		image_sm: staticMapData.Dust2.image_sm
+	},
+	{
+		name: 'Nuke',
+		class_name: 'de_nuke',
+		game_map_id: 'de_nuke',
+		guid: 'de_nuke',
+		image_lg: staticMapData.Nuke.image_lg,
+		image_sm: staticMapData.Nuke.image_sm
+	},
+	{
+		name: 'Anubis',
+		class_name: 'de_anubis',
+		game_map_id: 'de_anubis',
+		guid: 'de_anubis',
+		image_lg: staticMapData.Anubis.image_lg,
+		image_sm: staticMapData.Anubis.image_sm
+	},
+	{
+		name: 'Ancient',
+		class_name: 'de_ancient',
+		game_map_id: 'de_ancient',
+		guid: 'de_ancient',
+		image_lg: staticMapData.Ancient.image_lg,
+		image_sm: staticMapData.Ancient.image_sm
+	},
+	{
+		name: 'Vertigo',
+		class_name: 'de_vertigo',
+		game_map_id: 'de_vertigo',
+		guid: 'de_vertigo',
+		image_lg: staticMapData.Vertigo.image_lg,
+		image_sm: staticMapData.Vertigo.image_sm
+	}
+];
 
 // Mock Match IDs for different states
 export const MOCK_MATCH_IDS = {
@@ -109,7 +170,10 @@ export const MOCK_MATCH_DETAILS: Record<string, matchDetails> = {
 			faction2: { ...mockTeam2 }
 		},
 		voting: {
-			map: { pick: ['de_inferno', 'de_mirage', 'de_dust2'] }
+			map: { 
+				pick: ['de_inferno', 'de_mirage', 'de_dust2'],
+				entities: MOCK_MAP_ENTITIES
+			}
 		},
 		round: 0,
 		scheduled_at: Date.now() + 3600000, // 1 hour from now
@@ -254,7 +318,10 @@ export const MOCK_MATCH_DETAILS: Record<string, matchDetails> = {
 			faction2: { ...mockTeam2, score: 0 }
 		},
 		voting: {
-			map: { pick: ['de_inferno', 'de_mirage'] }
+			map: { 
+				pick: ['de_inferno', 'de_mirage'],
+				entities: MOCK_MAP_ENTITIES
+			}
 		},
 		round: 2,
 		scheduled_at: Date.now() - 7200000,
@@ -1175,7 +1242,12 @@ export function generateAlwaysNewMockData(): { details: matchDetails; stats: mat
 			faction1: { ...mockTeam1, score: 0 },
 			faction2: { ...mockTeam2, score: 0 }
 		},
-		voting: { map: { pick: picked } },
+		voting: { 
+			map: { 
+				pick: picked,
+				entities: MOCK_MAP_ENTITIES
+			} 
+		},
 		round: 1,
 		scheduled_at: now - 2 * 60 * 60 * 1000,
 		configured_at: now - 90 * 60 * 1000,
